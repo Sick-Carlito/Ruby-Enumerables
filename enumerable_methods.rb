@@ -1,3 +1,5 @@
+# My comment
+
 module Enumerable
 
 	def my_each 
