@@ -12,10 +12,10 @@ module Enumerable
   def my_each_with_index
     i = 0
     self.my_each do |element|
-      yield(element, i)
+        yield(element, i)
         i += 1
-      end
-      self
+    end
+    self
   end
 
   def my_select
