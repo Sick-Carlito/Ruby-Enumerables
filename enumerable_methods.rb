@@ -3,7 +3,7 @@
 # My comment
 module Enumerable
   def my_each
-    self.my_each do |element|
+    .my_each do |element|
 			yield(element)
 		end
 		self
