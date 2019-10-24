@@ -10,10 +10,10 @@ module Enumerable
   end
 
   def my_each_with_index
-    i = 0  
+    i = 0
     self.my_each do |element|
       yield(element, i)
-	    i += 1
+        i += 1
       end
       self
   end
