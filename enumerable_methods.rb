@@ -3,55 +3,55 @@
 # My comment
 module Enumerable
   def my_each
-    .each in |element|
+    for element in self
 			yield(element)
 		end
 		self
   end
 
-	def my_each_with_index
+  def my_each_with_index
 		i = 0
 		self.my_each do |element|
 			yield(element, i)
 			i += 1
 		end
 		self
-	end
+  end
 
-	def my_select
+  def my_select
 		selected = [] if self.class == Array
 		selected = {} if self.class == Hash
 		self.my_each do |element|
 			selected.push(element) if yield(element) != false
 		end
 		selected
-	end
+  end
 
-	def my_all?
+  def my_all?
 		all = true
 		self.my_each do |element|
 			all = false if yield(element) == false
 		end
 		all
-	end
+  end
 
-	def my_any?
+  def my_any?
 		any = false
 		self.my_each do |element|
 			any = true if yield(element) == true
 		end
 		any
-	end
+  end
 
-	def my_none?
+  def my_none?
 		none = true
 		self.my_each do |element|
 			none = false if yield(element) == true
 		end
 		none
-	end
+  end
 
-	def my_count
+  def my_count
 		count = 0
 		self.my_each do |element|
 			if block_given?
@@ -61,9 +61,9 @@ module Enumerable
 			end
 		end
 		count
-	end
+  end
 
-	def my_map(proc=nil)
+  def my_map(proc=nil)
 		mapped = []
 
 		#Modifying My_map to take in proc or a bloc
@@ -78,15 +78,15 @@ module Enumerable
 			end
 		end
 		mapped
-	end
+  end
 
-	def my_inject(value=self[0])
+  def my_inject(value=self[0])
 		value ||= []
 		self.my_each do |element|
 			value = yield(value, element) 
 		end
 		value 
-	end
+  end
 end
 
 #Testing my_inject method
