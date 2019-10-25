@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-
-module Enumerable # my comment
+# rubocop:disable Metrics/ModuleLength
+module Enumerable 
   def my_each
     return to_enum unless block_given?
 
@@ -30,7 +30,7 @@ module Enumerable # my comment
     item_select
   end
 
-  # my comment
+  # rubocop:disable  Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   def my_all?(param = nil)
     if block_given?
       my_each { |i| return false unless yield(i) }
@@ -126,12 +126,13 @@ module Enumerable # my comment
     operand
   end
 end
-# comment
+# rubocop:enable  Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+
 def multiply_els(arr)
   arr.my_inject { |a, b| a * b }
 end
 
-var1 = multiply_els([2, 4, 5])
+var1 = multiply_els(["2", "4", "5"])
 print var1
 puts ''
 
