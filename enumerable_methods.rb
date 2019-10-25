@@ -22,8 +22,8 @@ module Enumerable
     selected = [] if self.class == Array
     selected = {} if self.class == Hash
                      .my_each do |element|
-    selected.push(element) if yield(element) != false
-                  end
+                    selected.push(element) if yield(element) != false
+                    end
     selected
   end
 
@@ -39,7 +39,7 @@ module Enumerable
     any = false
           .my_each do |element|
             any = true if yield(element) == true
-                       end
+          end
     any
   end
 
@@ -47,17 +47,17 @@ module Enumerable
     none = true
            .my_each do |element|
           none = false if yield(element) == true
-          end
+    end
     none
   end
 
   def my_count
-        count = 0
-        self.my_each do |element|
-            if block_given?
-                count += 1 if yield(element) != false
+    count = 0
+            .my_each do |element|
+          if block_given?
+              count += 1 if yield(element) != false
             else
-                count +=1
+              count += 1
             end
         end
         count
