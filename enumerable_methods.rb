@@ -132,7 +132,7 @@ def multiply_els(arr)
   arr.my_inject { |a, b| a * b }
 end
 
-var1 = multiply_els(%w["2", "4", "5"])
+var1 = multiply_els(%w[2, 4, 5])
 print var1
 puts %w[""]
 
