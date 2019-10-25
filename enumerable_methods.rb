@@ -22,7 +22,7 @@ module Enumerable
     selected = [] if self.class == Array
     selected = {} if self.class == Hash
                      .my_each do |element|
-                    selected.push(element) if yield(element) != false
+                  selected.push(element) if yield(element) != false
                     end
     selected
   end
@@ -46,7 +46,7 @@ module Enumerable
   def my_none?
     none = true
            .my_each do |element|
-          none = false if yield(element) == true
+      none = false if yield(element) == true
     end
     none
   end
@@ -55,15 +55,15 @@ module Enumerable
     count = 0
             .my_each do |element|
           if block_given?
-              count += 1 if yield(element) != false
-            else
-              count += 1
-            end
+            count += 1 if yield(element) != false
+          else
+            count += 1
+          end
         end
         count
   end
 
-  def my_map(proc=nil)
+  def my_map(proc = nil)
         mapped = []
 
         #Modifying My_map to take in proc or a bloc
