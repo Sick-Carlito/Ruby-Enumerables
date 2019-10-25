@@ -2,7 +2,7 @@
 
 # rubocop:disable Metrics/ModuleLength
 
-# rubocop:enable
+# rubocop:enable Metrics/ModuleLength
 
 module Enumerable
   def my_each
@@ -133,7 +133,7 @@ end
 # rubocop:enable  Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
 def multiply_els(arr)
-  arr.my_inject %w{ |a, b| a * b }
+  arr.my_inject { |a, b| a * b }
 end
 
 var1 = multiply_els(["2", "4", "5"])
