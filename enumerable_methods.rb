@@ -1,99 +1,140 @@
 # frozen_string_literal: true
 
-# My comment
-module Enumerable
+module Enumerable # my comment
   def my_each
-    for element in self
-      yield(element)
-    end
-    self
-  end
+    return to_enum unless block_given?
 
-  def my_each_with_index
     i = 0
-        .my_each do |element|
-      yield(element, i)
+    while i < size
+      yield(self[i])
       i += 1
     end
     self
   end
 
+  def my_each_with_index
+    return to_enum unless block_given?
+
+    i = 0
+    while i < size
+      yield(self[i], i)
+      i += 1
+    end
+  end
+
   def my_select
-    selected = [] if self.class == Array
-    selected = {} if self.class == Hash
-                     .my_each do |element|
-                      selected.push(element) if yield(element) != false
+    return to_enum unless block_given?
+
+    item_select = []
+    my_each { |i| item_select << i if yield(i) }
+    item_select
+  end
+
+  # my comment
+  def my_all?(param = nil)
+    if block_given?
+      my_each { |i| return false unless yield(i) }
+    elsif param.class == Class
+      my_each { |i| return false unless i.class == param }
+    elsif param.class == Regexp
+      my_each { |i| return false unless i =~ param }
+    elsif param.nil?
+      my_each { |i| return false unless i }
+    else
+      my_each { |i| return false unless i == param }
     end
-    selected
+    true
   end
 
-  def my_all?
-    all = true
-          .my_each do |element|
-      all = false if yield(element) == false
+  def my_any?(param = nil)
+    if block_given?
+      my_each { |i| return true if yield(i) }
+    elsif param.class == Class
+      my_each { |i| return true if i.class == param }
+    elsif param.class == Regexp
+      my_each { |i| return true if i =~ param }
+    elsif param.nil?
+      my_each { |i| return true if i }
+    else
+      my_each { |i| return true if i == param }
     end
-    all
+    false
   end
 
-  def my_any?
-    any = false
-          .my_each do |element|
-            any = true if yield(element) == true
-          end
-    any
-  end
-
-  def my_none?
-    none = true
-           .my_each do |element|
-      none = false if yield(element) == true
+  def my_none?(param = nil)
+    if block_given?
+      my_each { |i| return false if yield(i) }
+    elsif param.class == Class
+      my_each { |i| return false if i.class == param }
+    elsif param.class == Regexp
+      my_each { |i| return false if i =~ param }
+    elsif param.nil?
+      my_each { |i| return false if i }
+    else
+      my_each { |i| return false if i == param }
     end
-    none
+    true
   end
 
-  def my_count
+  def my_count(items = nil)
     count = 0
-            .my_each do |element|
-          if block_given?
-            count += 1 if yield(element) != false
-          else
-            count += 1
-          end
+    if block_given?
+      my_each { |i| count += 1 if yield(i) == true }
+    elsif items.nil?
+      my_each { count += 1 }
+    else
+      my_each { |i| count += 1 if i == items }
     end
     count
   end
 
-  def my_map(proc = nil)
-    mapped = []
+  def my_map(arg = nil)
+    return to_enum unless block_given?
 
-        # Modifying My_map to take in proc or a bloc
-
-        if proc && proc.class == proc
-          .my_each do |element|
-              mapped.push(proc.call(element))
-            end
-        else
-            self.my_each do |element|
-                mapped.push(yield(element))
-            end
-        end
-        mapped
+    arr = []
+    my_each do |i|
+      arr << if !arg.nil?
+               arg.call(i)
+             else
+               yield(i)
+             end
+    end
+    arr
   end
 
-  def my_inject(value=self[0])
-        value ||= []
-        self.my_each do |element|
-            value = yield(value, element) 
-        end
-        value 
+  def my_inject(*args)
+    arr = to_a.dup
+    if args[0].nil?
+      operand = arr.shift
+    elsif args[1].nil? && !block_given?
+      symbol = args[0]
+      operand = arr.shift
+    elsif args[1].nil? && block_given?
+      operand = args[0]
+    else
+      operand = args[0]
+      symbol = args[1]
+    end
+
+    arr[0..-1].my_each do |i|
+      operand = if symbol
+                  operand.send(symbol, i)
+                else
+                  yield(operand, i)
+                end
+    end
+    operand
   end
 end
-
-#Testing my_inject method
-
-=begin
-def multiply_els(array)
-    array.my_inject(1) { |value, element| value * element }
+# comment
+def multiply_els(arr)
+  arr.my_inject { |a, b| a * b }
 end
-multiply_els([2,4,5])
-=end
+
+var1 = multiply_els([2, 4, 5])
+print var1
+puts ''
+
+block = proc { |string| string.upcase }
+var2 = %w[a b c].my_map(block)
+print var2
