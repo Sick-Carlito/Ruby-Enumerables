@@ -22,8 +22,8 @@ module Enumerable
     selected = [] if self.class == Array
     selected = {} if self.class == Hash
                      .my_each do |element|
-                  selected.push(element) if yield(element) != false
-                    end
+                      selected.push(element) if yield(element) != false
+    end
     selected
   end
 
@@ -59,18 +59,18 @@ module Enumerable
           else
             count += 1
           end
-        end
-        count
+    end
+    count
   end
 
   def my_map(proc = nil)
-        mapped = []
+    mapped = []
 
-        #Modifying My_map to take in proc or a bloc
+        # Modifying My_map to take in proc or a bloc
 
         if proc && proc.class == proc
-            self.my_each do |element|
-                mapped.push(proc.call(element))
+          .my_each do |element|
+              mapped.push(proc.call(element))
             end
         else
             self.my_each do |element|
