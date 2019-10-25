@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 # rubocop:disable Metrics/ModuleLength
-module Enumerable 
+
+module Enumerable # rubocop:enable
   def my_each
     return to_enum unless block_given?
 
@@ -134,7 +135,7 @@ end
 
 var1 = multiply_els(["2", "4", "5"])
 print var1
-puts ''
+puts ""
 
 block = proc { |string| string.upcase }
 var2 = %w[a b c].my_map(block)
