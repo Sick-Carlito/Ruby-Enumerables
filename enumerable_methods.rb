@@ -11,19 +11,19 @@ module Enumerable
 
   def my_each_with_index
     i = 0
-    .my_each do |element|
+        .my_each do |element|
       yield(element, i)
-        i += 1
+      i += 1
     end
     self
   end
 
   def my_select
-        selected = [] if self.class == Array
-        selected = {} if self.class == Hash
-        self.my_each do |element|
-            selected.push(element) if yield(element) != false
-        end
+    selected = [] if self.class == Array
+    selected = {} if self.class == Hash
+      self.my_each do |element|
+        selected.push(element) if yield(element) != false
+      end
         selected
   end
 
