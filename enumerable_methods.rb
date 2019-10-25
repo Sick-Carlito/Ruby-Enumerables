@@ -21,18 +21,18 @@ module Enumerable
   def my_select
     selected = [] if self.class == Array
     selected = {} if self.class == Hash
-      self.my_each do |element|
-        selected.push(element) if yield(element) != false
-      end
-        selected
+      .my_each do |element|
+      selected.push(element) if yield(element) != false
+    end
+      selected
   end
 
   def my_all?
-        all = true
-        self.my_each do |element|
-            all = false if yield(element) == false
-        end
-        all
+    all = true
+      .my_each do |element|
+      all = false if yield(element) == false
+    end
+      all
   end
 
   def my_any?
