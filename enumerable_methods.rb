@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/ModuleLength
-
 # rubocop:enable Metrics/ModuleLength
 
 module Enumerable
@@ -138,7 +136,7 @@ end
 
 var1 = multiply_els(["2", "4", "5"])
 print var1
-puts ""
+puts %w""
 
 block = proc { |string| string.upcase }
 var2 = %w[a b c].my_map(block)
