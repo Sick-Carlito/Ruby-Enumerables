@@ -1,7 +1,10 @@
 # frozen_string_literal: true
+
 # rubocop:disable Metrics/ModuleLength
 
-module Enumerable # rubocop:enable
+# rubocop:enable
+
+module Enumerable
   def my_each
     return to_enum unless block_given?
 
@@ -130,7 +133,7 @@ end
 # rubocop:enable  Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
 def multiply_els(arr)
-  arr.my_inject { |a, b| a * b }
+  arr.my_inject %w{ |a, b| a * b }
 end
 
 var1 = multiply_els(["2", "4", "5"])
