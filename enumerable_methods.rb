@@ -23,7 +23,7 @@ module Enumerable
     selected = {} if self.class == Hash
                      .my_each do |element|
       selected.push(element) if yield(element) != false
-      end
+        end
     selected
   end
 
@@ -39,15 +39,15 @@ module Enumerable
     any = false
           .my_each do |element|
               any = true if yield(element) == true
-            end
+              end
     any
   end
 
   def my_none?
     none = true
            .my_each do |element|
-            none = false if yield(element) == true
-        end
+          none = false if yield(element) == true
+          end
     none
   end
 
