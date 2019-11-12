@@ -6,7 +6,7 @@ module Enumerable # rubocop:disable Metrics/ModuleLength
 
     i = 0
     while i < size
-      yield(self[i])
+      yield(self[i].to_i)
       i += 1
     end
     self
@@ -120,7 +120,7 @@ module Enumerable # rubocop:disable Metrics/ModuleLength
       operand = if symbol
                   operand.send(symbol, i)
                 else
-                  yield(operand, i)
+                  yield(operand, i.to_i)
                 end
     end
     operand
