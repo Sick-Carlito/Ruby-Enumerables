@@ -25,7 +25,6 @@ RSpec.describe Enumerable do
     end
   end
 
-
   describe "#my_each_with_index" do
     context "If block is not given" do
       it "Return enumerable object" do
